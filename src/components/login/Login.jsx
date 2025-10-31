@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 
 
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import toast from 'react-hot-toast';
-import empServices from '../../service/empServices';
+
 import { Link,useNavigate } from 'react-router-dom';
-import {contextApi}   from "../context/Context"
+
 
 
 const Login = () => {
-    const {globalState,setGlobalState}=useContext(contextApi)
+
   let nagivate=useNavigate()
   const [state,setState]=useState({})
 
@@ -29,7 +29,7 @@ const Login = () => {
         let data=await empServices.loginUser(state)
         if(data.status==200){
         toast.success("login successfully")
-        setGlobalState((preVal)=>({...preVal,token:data.data.token}))
+
         nagivate("/home")
       }
       else{

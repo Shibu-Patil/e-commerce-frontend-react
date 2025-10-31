@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import userService from "../helper/services/userService";
 
 const initalState={
     userDetails:{
@@ -13,6 +14,23 @@ const initalState={
     error:null,
     cart:[],
 }
+
+
+export const registerUSerThunk = createAsyncThunk(
+  "auth/register",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    
+    try {
+      const { data } = await userService.registerUser(payload)
+      return data
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message || "Something went wrong"
+      )
+    }
+  }
+)
 
 export const userSlice=createSlice({
     name:"user",
