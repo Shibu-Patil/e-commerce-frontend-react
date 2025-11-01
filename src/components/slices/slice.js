@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "../helper/services/userService";
 
-const initalState={
+const initialState={
     userDetails:{
         userName:null,
         userId:null,
@@ -85,11 +85,11 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // ========== REGISTER ==========
-      .addCase(registerUserThunk.pending, (state) => {
+      .addCase(registerUSerThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(registerUserThunk.fulfilled, (state, action) => {
+      .addCase(registerUSerThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.userDetails = {
           userName: action.payload.userName,
@@ -100,7 +100,7 @@ const userSlice = createSlice({
         state.role = action.payload.role || "user";
         state.isLogged = true;
       })
-      .addCase(registerUserThunk.rejected, (state, action) => {
+      .addCase(registerUSerThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
